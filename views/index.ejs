@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Online photo album</title>
+
+    <!-- CSS -->
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+
+    <!-- Fonts -->
+
+</head>
+
+<body>
+    <header>
+        <h1>hello world!</h1>
+        <div>
+            <% for (let i = 0; i < data.length; i++) { %>
+            <div>
+                <img src="src/images/<%=data[i].image%>" alt="poster image">
+                <p><%= data[i].photographer %></p>
+            </div>
+            <% } %>
+        </div>
+    </header>
+</body>

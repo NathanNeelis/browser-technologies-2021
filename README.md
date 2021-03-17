@@ -52,11 +52,12 @@ Do you want your images added to this app? Simply upload them! Made a mistake? G
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 ### Project status 
+* ✅  Wireflows v1    
 * ✅  Render hello world server side   
   
-* ❌  Recap MongoDB database _-- must have_  
-* ❌  Link database to server _-- must have_    
-* ❌  Create a few objects  in database _-- must have_  
+* ✅  Recap MongoDB database _-- must have_  
+* ✅  Link database to server _-- must have_    
+* ✅  Create a few objects  in database _-- must have_  
 * ❌  Render overview page HTML only _-- must have_    
 * ❌  Render detail page HTML only _-- must have_   
 * ❌  Create upload page HTML only _-- must have_  

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,16 @@
   "bugs": {
     "url": "https://github.com/NathanNeelis/browser-technologies-2021/issues"
   },
-  "homepage": "https://github.com/NathanNeelis/browser-technologies-2021#readme"
+  "homepage": "https://github.com/NathanNeelis/browser-technologies-2021#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.5",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
