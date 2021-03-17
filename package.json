@@ -1,0 +1,34 @@
+{
+  "name": "browser-technologies-2021",
+  "version": "1.0.0",
+  "description": "photo album app",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanNeelis/browser-technologies-2021.git"
+  },
+  "keywords": [
+    "photo",
+    "ablum",
+    "node",
+    "progressive",
+    "enhancement",
+    "pe",
+    "accessibility",
+    "fun",
+    "javascript",
+    "semantics",
+    "html",
+    "css"
+  ],
+  "author": "Nathan Neelis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NathanNeelis/browser-technologies-2021/issues"
+  },
+  "homepage": "https://github.com/NathanNeelis/browser-technologies-2021#readme"
+}
