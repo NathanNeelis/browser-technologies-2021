@@ -1,17 +1,16 @@
 <%- include('includes/head.ejs'); %>
 <%- include('includes/header.ejs'); %>
 <main>
-    <h1>hello world!</h1>
-    <div>
+    <section>
         <% for (let i = 0; i < data.length; i++) { %>
-        <div>
+        <article id="<%=data[i]._id%>">
             <a href="/<%=data[i]._id%>">
                 <img src="uploads/<%=data[i].image%>" alt="<%=data[i].title%>" width="300">
-                <p><%= data[i].photographer %></p>
+                <h2><%= data[i].title %></h2>
             </a>
-        </div>
+        </article>
         <% } %>
-    </div>
+    </section>
 </main>
 
 <%- include('includes/footer.ejs'); %>

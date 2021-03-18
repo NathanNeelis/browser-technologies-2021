@@ -41,11 +41,6 @@ mongo.MongoClient.connect(
 );
 
 app.use(express.static(__dirname + "/src"));
-app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
-);
 app.set("view engine", "ejs"); // Templating
 app.set("views", "views"); // Templating
 
@@ -54,10 +49,12 @@ app.set("views", "views"); // Templating
 app.get("/", home); // Routing
 app.get("/upload", uploadPhotograph); // Routing
 app.get("/:id", photographDetails);
+app.get("/edit/:id", editPhotograph);
 
 
 
-app.post("/", upload.single("image"), add);
+app.post("/upload", upload.single("image"), add);
+app.post("/edit/:id", update);
 
 app.use(notFound);
 app.listen(port, () => {
@@ -91,15 +88,9 @@ async function home(req, res, next) {
 function uploadPhotograph(req, res, next) {
     // db.collection("friendshipData").find().toArray(done);
 
-    renderPage()
 
-    function renderPage(err) {
-        if (err) {
-            next(err);
-        } else {
-            res.render("upload.ejs", {});
-        }
-    }
+    res.render("upload.ejs");
+
 }
 
 // upload photographs to server
@@ -147,4 +138,59 @@ function photographDetails(req, res, next) {
             console.log('Error: client ID could not been found!');
         }
     });
+};
+
+
+
+
+
+function editPhotograph(req, res, next) {
+    // create new object ID to refer to the params
+    let ObjectId = mongo.ObjectId;
+    let id = req.params.id;
+    var searchID = new ObjectId(id);
+
+
+    db.collection("data").findOne({
+        _id: searchID
+    }, (err, data) => {
+        if (err) {
+            console.log('MongoDB Error:' + err);
+        }
+        if (data) {
+            res.render('edit_detailpage.ejs', {
+                data: data
+            });
+        } else {
+            console.log('Error: client ID could not been found!');
+        }
+    });
+}
+
+function update(req, res, next) {
+    let ObjectId = mongo.ObjectId;
+    let id = req.params.id;
+    var searchID = new ObjectId(id);
+
+    db.collection('data').updateOne({
+        _id: searchID
+    }, {
+        $set: {
+            photographer: req.body.edit_photographer
+        },
+        $currentDate: {
+            lastModified: true
+        }
+    }, done);
+
+
+    function done(err, data) {
+        if (err) {
+            next(err);
+        } else {
+            res.redirect("/edit/" + id);
+        }
+    }
+
+
 };

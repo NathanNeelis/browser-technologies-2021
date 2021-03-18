@@ -1,0 +1,18 @@
+<%- include('includes/head.ejs'); %>
+<%- include('includes/header.ejs'); %>
+<main>
+    <h2>edit profile</h2>
+    <form action="/edit/<%=data._id%>" method="post">
+        <img src="../uploads/<%=data.image%>" alt="<%=data.title%>" width="600">
+        <legend><%= data.title %></legend>
+
+        <label for="edit_photographer">Name photographer</label>
+        <input type="text" id="edit_photographer" name="edit_photographer" value="<%= data.photographer%>">
+
+        <input type="submit" value="Save changes" id="saveChanges">
+        <label for="saveChanges"><span class="">Save changes</span></label>
+
+    </form>
+</main>
+
+<%- include('includes/footer.ejs'); %>
