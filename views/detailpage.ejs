@@ -1,0 +1,13 @@
+<%- include('includes/head.ejs'); %>
+<%- include('includes/header.ejs'); %>
+<main>
+    <h2>This is the detail page</h2>
+    <div>
+        <div>
+            <img src="uploads/<%=data.image%>" alt="<%=data.title%>" width="600">
+            <p><%= data.photographer %></p>
+        </div>
+    </div>
+</main>
+
+<%- include('includes/footer.ejs'); %>

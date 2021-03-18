@@ -1,0 +1,39 @@
+<%- include('includes/head.ejs'); %>
+<%- include('includes/header.ejs'); %>
+
+<main>
+    <section>
+        <form action=/ method=post enctype="multipart/form-data">
+            <fieldset>
+                <legend>Upload your photograph</legend>
+
+
+                <label for="photographer">Name photographer</label>
+                <input type="text" id="photographer" name="photographer" placeholder="Who took the photograph?">
+
+                <label for="location">Location photograph</label>
+                <input type="text" id="location" name="location" placeholder="Where is the photograph taken?">
+
+                <label for="titlePhoto">Short Description</label>
+                <input type="text" id="titlePhoto" name="titlePhoto"
+                    placeholder="A description of the photo in 2 to 5 words">
+
+                <label for="description">Description</label>
+                <textarea name="description" id="description"
+                    placeholder="Tell something about the photograph, this can by anything you want us to know!"></textarea>
+
+                <label for="image" class="imageLabel">Upload your photo!
+                    <p id="fileInfoText"></p></label>
+                <input type="file" name="image" id="image" accept="image/*">
+
+
+                <input type="submit" value="upload" id="uploadPhotograph">
+                <label for="uploadPhotograph"><span class="">Upload</span></label>
+
+            </fieldset>
+        </form>
+    </section>
+
+</main>
+
+<%- include('includes/footer.ejs'); %>
