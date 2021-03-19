@@ -41,6 +41,11 @@ mongo.MongoClient.connect(
 );
 
 app.use(express.static(__dirname + "/src"));
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    })
+);
 app.set("view engine", "ejs"); // Templating
 app.set("views", "views"); // Templating
 
@@ -170,7 +175,7 @@ function editPhotograph(req, res, next) {
 function update(req, res, next) {
     let ObjectId = mongo.ObjectId;
     let id = req.params.id;
-    var searchID = new ObjectId(id);
+    let searchID = new ObjectId(id);
 
     db.collection('data').updateOne({
         _id: searchID
@@ -188,7 +193,7 @@ function update(req, res, next) {
         if (err) {
             next(err);
         } else {
-            res.redirect("/edit/" + id);
+            res.redirect("/" + id);
         }
     }
 
