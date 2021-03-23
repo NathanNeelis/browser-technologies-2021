@@ -53,13 +53,17 @@ app.set("views", "views"); // Templating
 
 app.get("/", home); // Routing
 app.get("/upload", uploadPhotograph); // Routing
+app.get("/series", series);
 app.get("/:id", photographDetails);
 app.get("/edit/:id", editPhotograph);
 
 
 
+
 app.post("/upload", upload.single("image"), add);
+// app.post("/series", moveSeries);
 app.post("/edit/:id", update);
+app.post("/:id", addSeries);
 
 app.use(notFound);
 app.listen(port, () => {
@@ -77,6 +81,7 @@ function notFound(req, res) {
 // home page
 async function home(req, res, next) {
     const allData = await db.collection("data").find().toArray();
+    allData.reverse();
 
     renderPage(allData)
 
@@ -89,13 +94,9 @@ async function home(req, res, next) {
 
 }
 
-// home page
 function uploadPhotograph(req, res, next) {
     // db.collection("friendshipData").find().toArray(done);
-
-
     res.render("upload.ejs");
-
 }
 
 // upload photographs to server
@@ -189,7 +190,7 @@ function update(req, res, next) {
     }, done);
 
 
-    function done(err, data) {
+    function done(err) {
         if (err) {
             next(err);
         } else {
@@ -199,3 +200,141 @@ function update(req, res, next) {
 
 
 };
+
+
+
+// series
+async function series(req, res, next) {
+    const allData = await db.collection("data").find().toArray();
+    const reversedData = allData.reverse();
+    // const series = allData.filter
+
+    // // var numbers = [1, 3, 6, 8, 11];
+
+    const series = allData.filter(data => {
+        return data.series === true
+    });
+
+    // console.log(series)
+
+    renderPage(series)
+
+    function renderPage(series) {
+        // console.log("this is all data", series);
+        res.render("series.ejs", {
+            data: series
+        });
+    }
+
+}
+
+function uploadPhotograph(req, res, next) {
+    // db.collection("friendshipData").find().toArray(done);
+    res.render("upload.ejs");
+}
+
+
+
+function addSeries(req, res, next) {
+    let ObjectId = mongo.ObjectId;
+    let id = req.params.id;
+    let searchID = new ObjectId(id);
+    let checkbox = req.body.addPhotoBox
+
+    if (checkbox) {
+        db.collection('data').updateOne({
+            _id: searchID
+        }, {
+            $set: {
+                series: true
+            },
+            $currentDate: {
+                lastModified: true
+            }
+        }, done);
+    } else {
+        db.collection('data').updateOne({
+            _id: searchID
+        }, {
+            $set: {
+                series: false
+            },
+            $currentDate: {
+                lastModified: true
+            }
+        }, done);
+    }
+
+
+    function done(err) {
+        if (err) {
+            next(err);
+        } else {
+            res.redirect("/" + id);
+        }
+    }
+
+
+};
+
+
+// FINISH MOVING ITEM UP AND DOWN IN ARRAY
+
+async function moveSeries(req, res, next) {
+    let ObjectId = mongo.ObjectId;
+    let id = req.body.move;
+    let searchID = new ObjectId(id);
+
+    const allData = await db.collection("data").find().toArray();
+    const reversedData = allData.reverse();
+
+    // const series = allData.filter(data => {
+    //     return data.series === true
+    // });
+
+    moveUp(searchID)
+    // db.collection("data").findOne({
+    //     _id: searchID
+    // }, (err, data) => {
+    //     if (err) {
+    //         console.log('MongoDB Error:' + err);
+    //     }
+    //     if (data) {
+    //         res.render('detailpage.ejs', {
+    //             data: data
+    //         });
+    //     } else {
+    //         console.log('Error: client ID could not been found!');
+    //     }
+    // });
+
+    function done(err) {
+        if (err) {
+            next(err);
+        } else {
+            res.redirect("/series");
+        }
+    }
+}
+
+// move up and down in array
+
+function moveUp(id) {
+    let index = arr.findIndex(e => e.id == id);
+    if (index > 0) {
+        let el = arr[index];
+        arr[index] = arr[index - 1];
+        arr[index - 1] = el;
+    }
+}
+
+
+
+function moveDown(id) {
+    let index = arr.findIndex(e => e.id == id);
+    if (index !== -1 && index < arr.length - 1) {
+        let el = arr[index];
+        arr[index] = arr[index + 1];
+        arr[index + 1] = el;
+    }
+}

@@ -9,6 +9,15 @@
         <label for="edit_photographer">Name photographer</label>
         <input type="text" id="edit_photographer" name="edit_photographer" value="<%= data.photographer%>">
 
+        <label for="edit_location">Location photograph</label>
+        <input type="text" id="edit_location" name="edit_location" value="<%= data.location%>">
+
+        <label for="edit_titlePhoto">Short Description</label>
+        <input type="text" id="edit_titlePhoto" name="edit_titlePhoto" value="<%= data.title%>">
+
+        <label for="edit_description">Description</label>
+        <textarea name="edit_description" id="edit_description"><%= data.description %></textarea>
+
         <input type="submit" value="Save changes" id="saveChanges">
         <label for="saveChanges"><span class="">Save changes</span></label>
 
