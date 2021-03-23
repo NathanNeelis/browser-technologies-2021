@@ -6,6 +6,7 @@ const app = express();
 const path = require("path");
 const multer = require("multer");
 const mongo = require("mongodb");
+const compression = require('compression');
 const storage = multer.diskStorage({
     // This adds a name and extension to the uploaded file.
     destination: function (req, file, cb) {
@@ -39,30 +40,28 @@ mongo.MongoClient.connect(
     }
 );
 
-app.use(express.static(__dirname + "/src"));
-app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
-);
-app.set("view engine", "ejs"); // Templating
-app.set("views", "views"); // Templating
+app.use(express.static(__dirname + "/src"))
+    .use(
+        bodyParser.urlencoded({
+            extended: true,
+        })
+    )
+    .use(compression());
+app.set("view engine", "ejs") // Templating
+    .set("views", "views"); // Templating
 
 
 
-app.get("/", home); // Routing
-app.get("/upload", uploadPhotograph);
-app.get("/series", series);
-app.get("/edit/:id", editPhotograph);
-app.get("/:id", photographDetails);
+app.get("/", home) // Routing
+    .get("/upload", uploadPhotograph)
+    .get("/series", series)
+    .get("/edit/:id", editPhotograph)
+    .get("/:id", photographDetails)
 
-
-
-
-app.post("/upload", upload.single("image"), add);
-// app.post("/series", moveSeries);
-app.post("/edit/:id", update);
-app.post("/:id", addSeries);
+    .post("/upload", upload.single("image"), add)
+    // .post("/series", moveSeries)
+    .post("/edit/:id", update)
+    .post("/:id", addSeries);
 
 app.use(notFound);
 app.listen(port, () => {
