@@ -1,7 +1,7 @@
 <%- include('includes/head.ejs'); %>
 <%- include('includes/header.ejs'); %>
 <main>
-    <section>
+    <section class="grid-masonry">
         <% for (let i = 0; i < data.length; i++) { %>
         <article id="<%=data[i]._id%>">
             <a href="/<%=data[i]._id%>">

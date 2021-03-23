@@ -2,8 +2,8 @@
 <%- include('includes/header.ejs'); %>
 
 <main>
-    <section>
-        <form action="/upload" method="post" enctype="multipart/form-data">
+    <section class="uploadSection">
+        <form action="/upload" method="post" class="uploadForm" enctype="multipart/form-data">
             <fieldset>
                 <legend>Upload your photograph</legend>
 
@@ -27,7 +27,7 @@
 
 
                 <input type="submit" value="upload" id="uploadPhotograph">
-                <label for="uploadPhotograph"><span class="">Upload</span></label>
+                <label for="uploadPhotograph"><span class="uploadLabel">Upload</span> </label>
 
             </fieldset>
         </form>
