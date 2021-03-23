@@ -10,15 +10,7 @@
                     <figcaption><%= data[i].title %></figcaption>
                 </figure>
             </a>
-            <form action="/series" method="post">
-                <input type="radio" id="male" name="move" value="<%=data[i]._id%>">
-                <label for="up">Up</label>
-                <input type="radio" id="female" name="move" value="<%=data[i]._id%>">
-                <label for="down">Down</label>
 
-                <input type="submit" value="Move item" id="moveItem">
-                <label for="moveItem"><span class="">move Item</span></label>
-            </form>
         </article>
         <% } %>
     </section>

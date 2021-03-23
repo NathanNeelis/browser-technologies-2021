@@ -4,7 +4,6 @@ const express = require("express"); // load express package
 const bodyParser = require("body-parser"); // load body parser for http requests
 const app = express();
 const path = require("path");
-const slug = require("slug");
 const multer = require("multer");
 const mongo = require("mongodb");
 const storage = multer.diskStorage({
@@ -52,10 +51,10 @@ app.set("views", "views"); // Templating
 
 
 app.get("/", home); // Routing
-app.get("/upload", uploadPhotograph); // Routing
+app.get("/upload", uploadPhotograph);
 app.get("/series", series);
-app.get("/:id", photographDetails);
 app.get("/edit/:id", editPhotograph);
+app.get("/:id", photographDetails);
 
 
 
@@ -121,13 +120,11 @@ function add(req, res, next) {
 }
 
 
-
-// profile page
 function photographDetails(req, res, next) {
     // create new object ID to refer to the params
     let ObjectId = mongo.ObjectId;
     let id = req.params.id;
-    var searchID = new ObjectId(id);
+    let searchID = new ObjectId(id);
 
 
     db.collection("data").findOne({
@@ -144,7 +141,7 @@ function photographDetails(req, res, next) {
             console.log('Error: client ID could not been found!');
         }
     });
-};
+}
 
 
 
@@ -154,7 +151,7 @@ function editPhotograph(req, res, next) {
     // create new object ID to refer to the params
     let ObjectId = mongo.ObjectId;
     let id = req.params.id;
-    var searchID = new ObjectId(id);
+    let searchID = new ObjectId(id);
 
 
     db.collection("data").findOne({
@@ -206,21 +203,15 @@ function update(req, res, next) {
 // series
 async function series(req, res, next) {
     const allData = await db.collection("data").find().toArray();
-    const reversedData = allData.reverse();
-    // const series = allData.filter
-
-    // // var numbers = [1, 3, 6, 8, 11];
+    allData.reverse();
 
     const series = allData.filter(data => {
         return data.series === true
     });
 
-    // console.log(series)
-
     renderPage(series)
 
     function renderPage(series) {
-        // console.log("this is all data", series);
         res.render("series.ejs", {
             data: series
         });
@@ -229,7 +220,6 @@ async function series(req, res, next) {
 }
 
 function uploadPhotograph(req, res, next) {
-    // db.collection("friendshipData").find().toArray(done);
     res.render("upload.ejs");
 }
 
@@ -276,65 +266,3 @@ function addSeries(req, res, next) {
 
 
 };
-
-
-// FINISH MOVING ITEM UP AND DOWN IN ARRAY
-
-async function moveSeries(req, res, next) {
-    let ObjectId = mongo.ObjectId;
-    let id = req.body.move;
-    let searchID = new ObjectId(id);
-
-    const allData = await db.collection("data").find().toArray();
-    const reversedData = allData.reverse();
-
-    // const series = allData.filter(data => {
-    //     return data.series === true
-    // });
-
-    moveUp(searchID)
-    // db.collection("data").findOne({
-    //     _id: searchID
-    // }, (err, data) => {
-    //     if (err) {
-    //         console.log('MongoDB Error:' + err);
-    //     }
-    //     if (data) {
-    //         res.render('detailpage.ejs', {
-    //             data: data
-    //         });
-    //     } else {
-    //         console.log('Error: client ID could not been found!');
-    //     }
-    // });
-
-    function done(err) {
-        if (err) {
-            next(err);
-        } else {
-            res.redirect("/series");
-        }
-    }
-}
-
-// move up and down in array
-
-function moveUp(id) {
-    let index = arr.findIndex(e => e.id == id);
-    if (index > 0) {
-        let el = arr[index];
-        arr[index] = arr[index - 1];
-        arr[index - 1] = el;
-    }
-}
-
-
-
-function moveDown(id) {
-    let index = arr.findIndex(e => e.id == id);
-    if (index !== -1 && index < arr.length - 1) {
-        let el = arr[index];
-        arr[index] = arr[index + 1];
-        arr[index + 1] = el;
-    }
-}
