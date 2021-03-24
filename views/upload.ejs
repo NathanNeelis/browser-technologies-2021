@@ -8,25 +8,32 @@
                 <legend>Upload your photograph</legend>
 
                 <label for="photographer">Name photographer</label>
-                <input type="text" id="photographer" name="photographer" placeholder="Who took the photograph?">
+                <input type="text" id="photographer" name="photographer" placeholder="Who took the photograph?"
+                    required>
 
                 <label for="location">Location photograph</label>
-                <input type="text" id="location" name="location" placeholder="Where is the photograph taken?">
+                <input type="text" id="location" name="location" placeholder="Where is the photograph taken?" required>
 
                 <label for="titlePhoto">Short Description</label>
                 <input type="text" id="titlePhoto" name="titlePhoto"
-                    placeholder="A description of the photo in 2 to 5 words">
+                    placeholder="A description of the photo in 2 to 5 words" required>
 
                 <label for="description">Description</label>
                 <textarea name="description" id="description"
-                    placeholder="Tell something about the photograph, this can by anything you want us to know!"></textarea>
-
-                <label for="image" class="imageLabel">Upload your photo!
-                    <p id="fileInfoText"></p></label>
-                <input type="file" name="image" id="image" accept="image/*">
+                    placeholder="Tell something about the photograph, this can by anything you want us to know!"
+                    required></textarea>
 
 
-                <input type="submit" value="upload" id="uploadPhotograph">
+                <section class="drop-zone">
+                    <span class="drop-zone_text"> Drop file here or click to upload</span>
+                    <!-- <div class="drop-zone_thumb" data-label="myfile.text"></div> -->
+                    <label for="image" id="imageLabel">Upload your photo!</label>
+                    <input type="file" name="image" class="drop-zone_input" id="image" accept="image/*" required>
+                </section>
+
+
+
+                <input type="submit" value="Upload" id="uploadPhotograph">
                 <label for="uploadPhotograph"><span class="uploadLabel">Upload</span> </label>
 
             </fieldset>

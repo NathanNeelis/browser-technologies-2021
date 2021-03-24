@@ -143,4 +143,5 @@ Changing views from slide-show to carousel and updating the order of the saved i
 [Browster technologies](https://platform.html5.org/)  
 [carousel css](https://css-tricks.com/css-only-carousel/)  
 [grid layout masonry](https://www.smashingmagazine.com/native-css-masonry-layout-css-grid/)
-
+[drag and drop](https://www.youtube.com/watch?v=Wtrin7C4b7w)  
+[icon for logo](https://thenounproject.com/search/?q=Photo&i=2059604)  
