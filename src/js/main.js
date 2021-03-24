@@ -23,11 +23,12 @@ if (dragDropCheck) {
 
         const locationInput = document.getElementById("location")
 
+        // const testURL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=-123&longitude=11&localityLanguage=en'
         const fetchUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + long + '&localityLanguage=en'
+
         getData(fetchUrl)
             .then(data => {
-                // console.log(data);
-                locationInput.value = data.city
+                testData(data, locationInput);
             })
     }
 
@@ -133,4 +134,14 @@ async function getData(url) {
     const response = await fetch(url);
     const data = await response.json();
     return data;
+}
+
+
+function testData(data, inputField) {
+    if (data.city) {
+        inputField.value = data.city
+    } else if (data.city === undefined) {
+        // should be error instead of placeholder ofcours.. just testing
+        inputField.placeholder = 'Your location can not be found, please try again later'
+    }
 }
