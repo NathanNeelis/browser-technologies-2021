@@ -13,7 +13,7 @@ if (dragDropCheck) {
     function clickForLocation() {
         navigator.geolocation.getCurrentPosition(getMyLocation)
         const locationInput = document.getElementById("location")
-        locationInput.value = "Loading data..."
+        locationInput.placeholder = "Loading data..."
     }
 
     // get GEO location
