@@ -199,7 +199,7 @@ textarea:focus {
     border-radius: .3rem;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     margin-bottom: 1rem;
 }
 
