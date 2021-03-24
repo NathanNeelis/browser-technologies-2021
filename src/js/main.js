@@ -4,6 +4,34 @@ const dragDropCheck = document.querySelector('.drop-zone')
 if (dragDropCheck) {
     uploadImageFailsave()
 
+    if (navigator.geolocation) {
+        const getLocation = document.getElementById('getLocation')
+        getLocation.addEventListener('click', clickForLocation)
+    }
+
+    // get geo location only when its triggered in click event
+    function clickForLocation() {
+        navigator.geolocation.getCurrentPosition(getMyLocation)
+        const locationInput = document.getElementById("location")
+        locationInput.value = "Loading data..."
+    }
+
+    // get GEO location
+    function getMyLocation(position) {
+        let long = position.coords.longitude;
+        let lat = position.coords.latitude;
+
+        const locationInput = document.getElementById("location")
+
+        const fetchUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + long + '&localityLanguage=en'
+        getData(fetchUrl)
+            .then(data => {
+                // console.log(data);
+                locationInput.value = data.city
+            })
+    }
+
+
     function uploadImageFailsave() {
         const inputField = document.querySelector('.drop-zone_input')
         const dropzone = document.querySelector('.drop-zone')
@@ -98,4 +126,11 @@ function updateThumbnail(dropZoneElement, file) {
     }
 
 
+}
+
+
+async function getData(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
 }

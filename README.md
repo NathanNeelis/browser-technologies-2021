@@ -108,6 +108,7 @@ Changing views from slide-show to carousel and updating the order of the saved i
 
 ### Enhancement browser technologies
 [Geolocation](https://w3c.github.io/geolocation-api/)  
+[drag and drop](https://html.spec.whatwg.org/multipage/dnd.html#dnd)  
 [Grid layout](https://drafts.csswg.org/css-grid/) I'm interested in the new masonry technique   
 
 
@@ -145,3 +146,4 @@ Changing views from slide-show to carousel and updating the order of the saved i
 [grid layout masonry](https://www.smashingmagazine.com/native-css-masonry-layout-css-grid/)
 [drag and drop](https://www.youtube.com/watch?v=Wtrin7C4b7w)  
 [icon for logo](https://thenounproject.com/search/?q=Photo&i=2059604)  
+[icon for location](https://thenounproject.com/search/?q=location&i=3805844)  
