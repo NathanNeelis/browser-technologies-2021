@@ -1,25 +1,32 @@
 <%- include('includes/head.ejs'); %>
 <%- include('includes/header.ejs'); %>
 <main>
-    <img src="uploads/<%=data.image %>" alt="<%=data.title%>" width="600">
-    <h2><%= data.title%></h2>
-    <p>Made by: <%= data.photographer%></p>
-    <p>Location: <%= data.location%></p>
-    <p>Description: <%= data.description%></p>
-    <a href="/edit/<%= data._id%>"> edit</a>
-    <form action="/<%=data._id%>" method="post">
-        <legend>Add photograph to your series</legend>
-        <% if (data.series) { %>
-        <input type="checkbox" id="addPhotoBox" name="addPhotoBox" value="addPhotoBox" checked>
-        <% } else {%>
-        <input type="checkbox" id="addPhotoBox" name="addPhotoBox" value="addPhotoBox">
-        <% } %>
-        <label for="addPhotoBox">Tick the box to add</label>
+    <section>
+        <article>
+            <h2><%= data.title%></h2>
+            <img src="uploads/<%=data.image %>" alt="<%=data.title%>" width="600">
+
+        </article>
+        <article>
+            <p>Made by: <%= data.photographer%></p>
+            <p>Location: <%= data.location%></p>
+            <p>Description: <%= data.description%></p>
+            <a href="/edit/<%= data._id%>"> edit</a>
+            <form action="/<%=data._id%>" method="post">
+                <legend>Add photograph to your series</legend>
+                <% if (data.series) { %>
+                <input type="checkbox" id="addPhotoBox" name="addPhotoBox" value="addPhotoBox" checked>
+                <% } else {%>
+                <input type="checkbox" id="addPhotoBox" name="addPhotoBox" value="addPhotoBox">
+                <% } %>
+                <label for="addPhotoBox">Tick the box to add</label>
 
 
-        <input type="submit" value="Add your photo" id="addPhoto">
-        <label for="addPhoto"><span class="">Add photo</span></label>
-    </form>
+                <input type="submit" value="Add your photo" id="addPhoto">
+                <label for="addPhoto"><span class="">Add photo</span></label>
+            </form>
+        </article>
+    </section>
 </main>
 
 <%- include('includes/footer.ejs'); %>

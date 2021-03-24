@@ -1,61 +1,67 @@
 // If javascript is enabled set input field op display none;
-uploadImageFailsave()
+const dragDropCheck = document.querySelector('.drop-zone')
 
-function uploadImageFailsave() {
-    const inputField = document.querySelector('.drop-zone_input')
-    const dropzone = document.querySelector('.drop-zone')
-    const inputText = document.querySelector('.drop-zone_text')
+if (dragDropCheck) {
+    uploadImageFailsave()
 
-    inputField.classList.add('active'); // adds standard input field
-    dropzone.classList.add('active'); // adds styling for drag and drop section
-    inputText.classList.add('active'); // adds drag and drop text
+    function uploadImageFailsave() {
+        const inputField = document.querySelector('.drop-zone_input')
+        const dropzone = document.querySelector('.drop-zone')
+        const inputText = document.querySelector('.drop-zone_text')
+
+        inputField.classList.add('active'); // adds standard input field
+        dropzone.classList.add('active'); // adds styling for drag and drop section
+        inputText.classList.add('active'); // adds drag and drop text
+
+    }
+
+    // RESOURCE DRAG AND DROP: https://www.youtube.com/watch?v=Wtrin7C4b7w
+
+
+    document.querySelectorAll('.drop-zone_input').forEach(inputElement => {
+        const dropZoneElement = inputElement.closest(".drop-zone");
+
+        // event listener for clicking event opens like you click on original input
+        dropZoneElement.addEventListener('click', e => {
+            inputElement.click();
+        })
+
+        // adds thumbnail also if you upload it by click
+        inputElement.addEventListener('change', e => {
+            if (inputElement.files.length) { // if there is an image selected
+                updateThumbnail(dropZoneElement, inputElement.files[0])
+            }
+        })
+
+        // when drags an item over box add style
+        dropZoneElement.addEventListener('dragover', e => {
+            e.preventDefault(); // dont open image in the browser window
+            dropZoneElement.classList.add('drop-zone_over');
+        })
+
+        // when drag leaves the box, remove the style
+        dropZoneElement.addEventListener('dragleave', e => {
+            dropZoneElement.classList.remove("drop-zone_over");
+        });
+
+        // when drag ends the box, remove the style
+        dropZoneElement.addEventListener('dragend', e => {
+            dropZoneElement.classList.remove("drop-zone_over");
+        });
+
+        dropZoneElement.addEventListener("drop", e => {
+            e.preventDefault(); // dont open image in the browser window
+            // console.log(e.dataTransfer.files)
+            if (e.dataTransfer.files.length) {
+                inputElement.files = e.dataTransfer.files; // transfers the file into the input. SO it works on submit
+                updateThumbnail(dropZoneElement, e.dataTransfer.files[0])
+            }
+
+            dropZoneElement.classList.remove('drop-zone_over');
+        })
+    });
 
 }
-
-// RESOURCE DRAG AND DROP: https://www.youtube.com/watch?v=Wtrin7C4b7w
-
-document.querySelectorAll('.drop-zone_input').forEach(inputElement => {
-    const dropZoneElement = inputElement.closest(".drop-zone");
-
-    // event listener for clicking event opens like you click on original input
-    dropZoneElement.addEventListener('click', e => {
-        inputElement.click();
-    })
-
-    // adds thumbnail also if you upload it by click
-    inputElement.addEventListener('change', e => {
-        if (inputElements.files.length) { // if there is an image selected
-            updateThumbnail(dropZoneElement, inputElement.files[0])
-        }
-    })
-
-    // when drags an item over box add style
-    dropZoneElement.addEventListener('dragover', e => {
-        e.preventDefault(); // dont open image in the browser window
-        dropZoneElement.classList.add('drop-zone_over');
-    })
-
-    // when drag leaves the box, remove the style
-    dropZoneElement.addEventListener('dragleave', e => {
-        dropZoneElement.classList.remove("drop-zone_over");
-    });
-
-    // when drag ends the box, remove the style
-    dropZoneElement.addEventListener('dragend', e => {
-        dropZoneElement.classList.remove("drop-zone_over");
-    });
-
-    dropZoneElement.addEventListener("drop", e => {
-        e.preventDefault(); // dont open image in the browser window
-        // console.log(e.dataTransfer.files)
-        if (e.dataTransfer.files.length) {
-            inputElement.files = e.dataTransfer.files; // transfers the file into the input. SO it works on submit
-            updateThumbnail(dropZoneElement, e.dataTransfer.files[0])
-        }
-
-        dropZoneElement.classList.remove('drop-zone_over');
-    })
-});
 
 function updateThumbnail(dropZoneElement, file) {
     // console.log(dropZoneElement);
