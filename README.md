@@ -99,6 +99,80 @@ Changing views from slide-show to carousel and updating the order of the saved i
   
 ![userflow2](https://user-images.githubusercontent.com/55492381/112154090-38ff6c80-8be4-11eb-976a-09c4409b6235.jpg)
 
+### The three layers
+#### Functional / reliable layer
+<details>
+<summary>Functional / reliable layer</summary>
+
+Core functionalities  
+  
+Overview page  
+some info  
+image--  
+  
+Detail page  
+some info  
+image--  
+  
+Upload an image  
+some info  
+image--  
+  
+Add to series  
+some info  
+image--  
+  
+Series overview page  
+some info  
+image--  
+
+</details>
+
+#### Usable layer
+<details>
+<summary>Usable layer</summary>
+
+#### Accessibility  
+So in the basics it should already be accessible. But we are going to add a visual layer to it to make the page better readable for users and give add extra hierarchy to elements that need to stand out. But in doing this, it is very important that we do not kill the accessibility. So this is the reason I also added this term to the usable layer, because we need to keep the photo album usable for everyone. This means when I add colors, I pay attention to contrast. In the WCAG guidelines the contrast should be 3:1 for big texts and 4.5:1 for smaller texts. I choose my collor scheme based on these guidelines.  
+  
+<img width="600" alt="contrast checker" src="https://user-images.githubusercontent.com/55492381/112494863-ab5a8300-8d83-11eb-9021-b9ff848133c6.png">  
+
+I also made sure focus styles are in place and you can tab through the items in the photo album.  
+  
+<img width="600" alt="Focus styles" src="https://user-images.githubusercontent.com/55492381/112495094-de9d1200-8d83-11eb-97a8-0d961e5c539e.png">  
+
+
+#### Hierarchy
+My upload form was in my opinion most in need of hierarchy. Using css styling I added the hierarchy so now you can see which labels belong to which input fields and where you need to drop your file to upload it.  
+  
+<img width="600" alt="upload form" src="https://user-images.githubusercontent.com/55492381/112495369-22901700-8d84-11eb-973b-80673ac1cc48.png">  
+  
+#### Ordening
+In the functional layer, all information is shown from top to bottom. To make the overview page more readable there needed to be some order in displaying the images with their titles.  
+  
+<img width="600" alt="unordered page" src="https://user-images.githubusercontent.com/55492381/112496176-cf6a9400-8d84-11eb-82d4-9bd1a43147db.png">  
+  
+To do this, I started with display grid, and made a row lay-out that gives the overview page a very clean and orderly feeling.
+I wanted to use grid masonry, but it isnt supported at al, only in Moz Firefox and then only if you enable it. This is still the plan to do with @supports. But in this example I used the 'old' grid styling to accomplish this lay-out.  
+  
+<img width="600" alt="grid layout" src="https://user-images.githubusercontent.com/55492381/112496772-4c960900-8d85-11eb-9ce4-1228b187f03d.png">  
+  
+#### Responsive
+Another way to improve the usability is making sure the photo album is responsive. By adding flex-boxes and grid lay-outs the album already becomes very responsive. But since I used a row lay-out for my overview pages I had to write some media queries to scale the amount of rows. Ofcours this is done from a mobile-first point of view.  
+  
+<img width="250" alt="Overview page on mobile device" src="https://user-images.githubusercontent.com/55492381/112499352-ac8daf00-8d87-11eb-9470-30447db89c1b.png">  
+  
+</details>
+
+#### Pleasurable layer
+<details>
+  <summary>Pleasurable layer</summary>
+
+
+</details>
+
+
+
 
 ### Browser testing list
 * Chrome op MacBook
@@ -110,8 +184,6 @@ Changing views from slide-show to carousel and updating the order of the saved i
 [Geolocation](https://w3c.github.io/geolocation-api/)  
 [drag and drop](https://html.spec.whatwg.org/multipage/dnd.html#dnd)  
 [Grid layout](https://drafts.csswg.org/css-grid/) I'm interested in the new masonry technique   
-
-
 
 
 ### Testing report
@@ -253,7 +325,7 @@ The Brave browser was alot quicker, but it might have still cached my location s
 
 </details>
   
-  #### Drag & Drop
+#### Drag & Drop
 <details>
 <summary>Test report Drag & Drop</summary>
   
@@ -308,7 +380,6 @@ if (dragDropCheck) {
 ### Project status 
 * ✅  Wireflows v1    
 * ✅  Render hello world server side   
-  
 * ✅  Recap MongoDB database _-- must have_  
 * ✅  Link database to server _-- must have_    
 * ✅  Create a few objects  in database _-- must have_  
@@ -316,8 +387,10 @@ if (dragDropCheck) {
 * ✅  Render detail page HTML only _-- must have_   
 * ✅  Create upload page HTML only _-- must have_  
 * ✅   Work out how to make series  _-- must have_  
-* ❌  Create other/new series page _-- nice to have_  
 * ✅  Render series to series page _-- must have_  
+
+
+* ❌  Create other/new series page _-- nice to have_  
 * ❌  View images in series in slideshow _-- must have_   
 * ❌  View image in series in carousel _-- nice to have_  
 * ❌  Update existing series with new images _-- nice to have_  
