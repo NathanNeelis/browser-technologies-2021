@@ -25,7 +25,7 @@ function geoError(err) {
 }
 
 
-if (navigator.geolocation) {
+if (navigator.geolocation) { // checks if geolocation is available in the browser
     const getLocation = document.getElementById('getLocation')
     if (getLocation) { // checks if element is on current page
         getLocation.addEventListener('click', clickForLocation)
@@ -57,19 +57,20 @@ function getMyLocation(position) {
 
     const locationInput = document.getElementById("location")
 
-    // somehwere in france with no city 
+    // somehwere in kazakstan with no city 
     // const testURL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=49.3811&longitude=48.7839&localityLanguage=en'
 
     const fetchUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + long + '&localityLanguage=en'
 
     getData(fetchUrl)
         .then(data => {
-            console.log(data)
+            // console.log(data)
             testData(data, locationInput);
             console.timeEnd('Get location')
         })
 }
 
+// RESOURCe https://stackoverflow.com/questions/57130901/getcurrentposition-in-js-does-not-work-on-ios
 
 function testData(data, inputField) {
     if (data.city) {

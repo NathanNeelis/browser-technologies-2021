@@ -33,7 +33,7 @@ nav ul {
 
 nav>ul>li {
     list-style: none;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
 }
 
 li:first-child {
@@ -99,10 +99,7 @@ article a {
 
 
 .grid-masonry img {
-    min-width: 5rem;
     width: 100%;
-    min-height: 5rem;
-    height: 100%;
     background: var(--lightgray);
     border-radius: .5rem;
     display: block;
@@ -129,7 +126,7 @@ figure {
 
 
 figcaption {
-    padding: .2em .5em;
+    padding: .2em 0 .2em .5em;
     color: #333;
     font-weight: 300;
 }
@@ -381,6 +378,9 @@ input[type=file] {
         column-count: 2;
     }
 
+
+
+
     nav ul {
         flex-direction: row;
     }
@@ -390,6 +390,11 @@ input[type=file] {
 @media all and (min-width: 40rem) {
     .grid-masonry {
         column-count: 3;
+    }
+
+    nav>ul>li {
+        list-style: none;
+        padding: 1rem 1.5rem;
     }
 
 }
