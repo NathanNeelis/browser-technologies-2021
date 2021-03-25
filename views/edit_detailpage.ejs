@@ -1,27 +1,40 @@
 <%- include('includes/head.ejs'); %>
 <%- include('includes/header.ejs'); %>
 <main>
-    <h2>edit profile</h2>
-    <form action="/edit/<%=data._id%>" method="post">
+    <section class="editPage">
+        <!-- <h2>edit profile</h2> -->
         <img src="../uploads/<%=data.image%>" alt="<%=data.title%>" width="600">
-        <legend><%= data.title %></legend>
+        <form action="/edit/<%=data._id%>" method="post">
+            <fieldset>
+                <legend><%= data.title%></legend>
+                <div class="wrapSave">
 
-        <label for="edit_photographer">Name photographer</label>
-        <input type="text" id="edit_photographer" name="edit_photographer" value="<%= data.photographer%>">
+                    <label for="edit_photographer" id="madeBy">Made by:</label>
+                    <input type="text" id="edit_photographer" name="edit_photographer" value="<%= data.photographer%>">
 
-        <label for="edit_location">Location photograph</label>
-        <input type="text" id="edit_location" name="edit_location" value="<%= data.location%>">
+                    <input type="submit" value="Save changes" id="saveChanges" name="saveChanges">
+                    <label for="saveChanges" id="saveChangesLabel">save</label>
 
-        <label for="edit_titlePhoto">Short Description</label>
-        <input type="text" id="edit_titlePhoto" name="edit_titlePhoto" value="<%= data.title%>">
+                </div>
 
-        <label for="edit_description">Description</label>
-        <textarea name="edit_description" id="edit_description"><%= data.description %></textarea>
 
-        <input type="submit" value="Save changes" id="saveChanges">
-        <label for="saveChanges"><span class="">Save changes</span></label>
 
-    </form>
+
+                <label for="edit_location">Photograph location:</label>
+                <input type="text" id="edit_location" name="edit_location" value="<%= data.location%>">
+
+                <label for="edit_titlePhoto">Short Description</label>
+                <input type="text" id="edit_titlePhoto" name="edit_titlePhoto" value="<%= data.title%>">
+
+                <label for="edit_description">Description</label>
+                <textarea name="edit_description" id="edit_description"><%= data.description %></textarea>
+
+
+
+            </fieldset>
+        </form>
+
+    </section>
 </main>
 
 <%- include('includes/footer.ejs'); %>

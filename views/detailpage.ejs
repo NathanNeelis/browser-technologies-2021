@@ -1,31 +1,35 @@
 <%- include('includes/head.ejs'); %>
 <%- include('includes/header.ejs'); %>
 <main>
-    <section>
-        <article>
-            <h2><%= data.title%></h2>
-            <img src="uploads/<%=data.image %>" alt="<%=data.title%>" width="600">
+    <section class="detailPage">
 
-        </article>
-        <article>
-            <p>Made by: <%= data.photographer%></p>
-            <p>Location: <%= data.location%></p>
+        <img src="uploads/<%=data.image %>" alt="<%=data.title%>" width="600">
+        <div>
+            <h2><%= data.title%></h2>
+            <div class="wrap">
+                <a href="/edit/<%= data._id%>"> edit</a>
+                <h3>Made by: <%= data.photographer%></h3>
+
+            </div>
+            <p>Photograph location: <%= data.location%></p>
             <p>Description: <%= data.description%></p>
-            <a href="/edit/<%= data._id%>"> edit</a>
+
             <form action="/<%=data._id%>" method="post">
-                <legend>Add photograph to your series</legend>
+                <!-- <fieldset> -->
+                <!-- <legend>Add photograph to your series</legend> -->
                 <% if (data.series) { %>
                 <input type="checkbox" id="addPhotoBox" name="addPhotoBox" value="addPhotoBox" checked>
                 <% } else {%>
                 <input type="checkbox" id="addPhotoBox" name="addPhotoBox" value="addPhotoBox">
                 <% } %>
-                <label for="addPhotoBox">Tick the box to add</label>
+                <label for="addPhotoBox">Click here to add this photo to your series</label>
 
 
                 <input type="submit" value="Add your photo" id="addPhoto">
-                <label for="addPhoto"><span class="">Add photo</span></label>
+                <label for="addPhoto" id="seriePhotoSubmitLabel"><span>Add photo to series</span></label>
+                <!-- </fieldset> -->
             </form>
-        </article>
+        </div>
     </section>
 </main>
 
