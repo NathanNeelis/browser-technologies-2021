@@ -14,18 +14,18 @@ Also in this app you can make a selection of photo's to add to a serie and view 
 
 
 ### Table of Contents  
-[View the app]()  
-[Description]()  
-[Getting started]()  
-[Core functionalities]()
-[Wireflows]()  
-[The three layers]()  
-[Browser testing list]()  
-[Enhancement browser technologies]()  
-[Testing reports]()  
-[Project status]()  
-[License]()  
-[Resources]()  
+[View the app](https://github.com/NathanNeelis/browser-technologies-2021#view-the-app)  
+[Description](https://github.com/NathanNeelis/browser-technologies-2021#description)  
+[Getting started](https://github.com/NathanNeelis/browser-technologies-2021#getting-started)  
+[Core functionalities](https://github.com/NathanNeelis/browser-technologies-2021#core-funcionalities)
+[Wireflows](https://github.com/NathanNeelis/browser-technologies-2021#wireflows)  
+[The three layers](https://github.com/NathanNeelis/browser-technologies-2021#the-three-layers)  
+[Browser testing list](https://github.com/NathanNeelis/browser-technologies-2021#browser-testing-list)  
+[Enhancement browser technologies](https://github.com/NathanNeelis/browser-technologies-2021#enhancement-browser-technologies)  
+[Testing reports](https://github.com/NathanNeelis/browser-technologies-2021#testing-report)  
+[Project status](https://github.com/NathanNeelis/browser-technologies-2021#project-status)  
+[License](https://github.com/NathanNeelis/browser-technologies-2021#license)  
+[Resources](https://github.com/NathanNeelis/browser-technologies-2021#resources)  
 
 
 ### Getting started
