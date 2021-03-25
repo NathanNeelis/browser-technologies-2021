@@ -20,18 +20,17 @@ function geoError(err) {
 
         const locationSpinner = document.querySelector('.locationWrap');
         locationSpinner.classList.remove('loading');
-
     }
 
 }
 
 
-if (navigator.geolocation) {
-    const getLocation = document.getElementById('getLocation')
-    if (getLocation) { // checks if element is on current page
-        getLocation.addEventListener('click', clickForLocation)
-    }
+// if (navigator.geolocation) {
+const getLocation = document.getElementById('getLocation')
+if (getLocation) { // checks if element is on current page
+    getLocation.addEventListener('click', clickForLocation)
 }
+// }
 
 // get geo location only when its triggered in click event
 function clickForLocation() {
