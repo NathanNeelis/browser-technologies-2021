@@ -19,8 +19,10 @@ Also in this app you can make a selection of photo's to add to a serie and view 
 [Getting started]()  
 [Core functionalities]()
 [Wireflows]()  
+[The three layers]()  
 [Browser testing list]()  
 [Enhancement browser technologies]()  
+[Testing reports]()  
 [Project status]()  
 [License]()  
 [Resources]()  
@@ -53,6 +55,7 @@ The core functionalities of this app are:
 * Upload a photo to the overview page
 * Add photo's to a series
 * Overview page with photo's in a serie
+* Edit meta information of a photograph
 
 ### Wireflows
 #### Overview / home page
@@ -104,27 +107,32 @@ Changing views from slide-show to carousel and updating the order of the saved i
 <details>
 <summary>Functional / reliable layer</summary>
 
-Core functionalities  
+The reliable layer is the layer that always should work. No matter the circumstances. In this layer the core functionalities are the most important. In this readme under the heading `core functionalities` I listed those in this project. Below I will go through some pages, and show that without css and without javascript my functionalities still work.
   
-Overview page  
-some info  
-image--  
+#### Overview page  
+The most important in this overview page is that you can use the navigation and see the content. The content are all the photographs shown on this page. It might not be beautifull and easy to read, but the content is all here!  
   
-Detail page  
-some info  
-image--  
+<img width="600" alt="basic overview page" src="https://user-images.githubusercontent.com/55492381/112501455-8e28b300-8d89-11eb-93ea-2139b9453c18.png">  
   
-Upload an image  
-some info  
-image--  
+#### Detail page  
+Just as important is the detail page. You can reach this page by clicking on a photograph in one of the overview pages. The most imporant on this page is that the content is shown. So you can see the image you clicked on in detail and read its meta information. 
+Also a core functionality on this page is that you can select it to add it to your photo serie. This option is on the bottom of the basic page with a checkbox and a submit button.  
   
-Add to series  
-some info  
-image--  
+<img width="600" alt="basic detail page" src="https://user-images.githubusercontent.com/55492381/112501940-f37ca400-8d89-11eb-94cc-2c6d4598f9d3.png">  
   
-Series overview page  
-some info  
-image--  
+#### Upload an image  
+Another core functionality is uploading a photograph. Even without css and javascript this is possible by using the upload form. The form is hardly readable, but if you pay some attention to what goes where, it really isn't so hard to upload a photograph yourself in this basic state.  
+  
+<img width="600" alt="bacis upload form" src="https://user-images.githubusercontent.com/55492381/112502671-8d445100-8d8a-11eb-9043-eb5c366e1d56.png">  
+  
+#### Series overview page  
+After you have selected some images in the detail page you can view all of your selected images in the series overview page. Just like the homepage is this page still readable after a fashion without css and javascript.   
+  
+#### Edit meta information
+I am still in doubt if this really is a core functionality. But I though i'd treat it as one. Can't hurt to make this functionality always available even if you dont have CSS and Javascript. When you click on the edit link, you will be redirected to a edit page where you can edit the meta information in the form again and save it. The information will update right away! So in the gif below, I haven't styled these pages yet except for the navigation. And I have Javascript disabled.  
+  
+![update](https://user-images.githubusercontent.com/55492381/112503878-9550c080-8d8b-11eb-875d-ef767f1ce8df.gif)  
+  
 
 </details>
 
@@ -162,11 +170,34 @@ Another way to improve the usability is making sure the photo album is responsiv
   
 <img width="250" alt="Overview page on mobile device" src="https://user-images.githubusercontent.com/55492381/112499352-ac8daf00-8d87-11eb-9470-30447db89c1b.png">  
   
+#### Geolocation
+Adding an geolocation option is very close to the pleasurable layer, but in this use case I actually think its still in the usable layer. Using geolocation you can add your location in the meta info without even thinking about where you are at the moment. As the most beautifull images are mostly made abroad and sometimes deep in nature, this option is very usable. I will explain more about how this feature works in the browser testing tab, but in the gif below you can see that just by hitting the icon your location gets added in the input field.  
+  
+![Geolocation_MBP_Brave](https://user-images.githubusercontent.com/55492381/112505114-c1207600-8d8c-11eb-8340-561250e8df22.gif)  
+  
 </details>
 
 #### Pleasurable layer
 <details>
-  <summary>Pleasurable layer</summary>
+<summary>Pleasurable layer</summary>
+
+#### Drag and drop
+Looking through your photographs, you finally find the one that you would like to upload. Hitting the browse button lets you search your file all over again. This can be a very frustrating experience. Using this drag and drop feature, you can just grab your file and drop it into the dropzone. And if you're not at home and on a mobile device, you can just click on the dropzone and even choose between taking a new photograph or selecting one in your files. The orignal method works just as well, because, you can actually drag and drop onto a original input field with the file type. But not many people know it, and you can't really style the element and tell the user you can. That is why this is in the pleasurable layer.  
+  
+![DragDrop_Android_Moz](https://user-images.githubusercontent.com/55492381/112506013-a1d61880-8d8d-11eb-91d8-9ff919312994.gif)  
+  
+#### User feedback
+By user feedback, I dont mean that all user feedback should be in the pleasurable layer. But since the feedback I give the user are already an enhancement I put this feedback in this layer. The first type of feedback I am giving the user is when you drag and drop an image in the dropzone of the upload form. The feedback the user gets is an thumbnail of the image he is uploading and the name of the file for reference.  
+  
+![DragDrop_MBP_Brave](https://user-images.githubusercontent.com/55492381/112506396-fe393800-8d8d-11eb-8478-c984ad799fc8.gif)  
+  
+The second type of feedback I am giving is on the geolocation option. When you click the button, it might take a few seconds to get your actual location into the browser and convert it by reverse geocoding. When this happends it shows you a spinner that something is happening. When I first tried if it worked, it already annoyed me that I wasnt seeing if it was working of not! Now I know that my request is being processed. Another type of feedback is when it takes to long to request the location. It might be very possible that you are in a location that isn't found or that your device/browser isn't allowing to use the location. Then you will see a message that your location cannot be found and that you will have to type it in manually. In the gif below I passed in a unknown location, you can see the spinner working and then you will see the error in the console. The message is displayed in the placeholder for now. 
+  
+![Geolocation_Error_MBP_Chrome](https://user-images.githubusercontent.com/55492381/112507022-9800e500-8d8e-11eb-9a22-8d93ef74231b.gif)  
+
+
+#### Grid masonry
+As a cherry on top I wanted to code the overview pages in a grid masonry. As this is not supported anywhere this really is a pleasurable layer. This is still on my to-do-list at this moment, time is running short. But I wanted to let you know that I atleast though about it.
 
 
 </details>
@@ -386,12 +417,17 @@ if (dragDropCheck) {
 * ✅  Render overview page HTML only _-- must have_    
 * ✅  Render detail page HTML only _-- must have_   
 * ✅  Create upload page HTML only _-- must have_  
-* ✅   Work out how to make series  _-- must have_  
+* ✅  Work out how to make series  _-- must have_  
 * ✅  Render series to series page _-- must have_  
+* ✅  CSS time _-- must have_ 
+* ✅  Add enhancement 1: Drag and drop _-- must have_ 
+* ✅  Add enhancement 2: Geolocation _-- must have_ 
+* ✅  Test enhancements in browsers _-- must have_ 
+* ✅  Finsih readme _-- must have_ 
 
-
+* ❌  Grid masonry _-- nice to have_  
 * ❌  Create other/new series page _-- nice to have_  
-* ❌  View images in series in slideshow _-- must have_   
+* ❌  View images in series in slideshow _-- nice to have_   
 * ❌  View image in series in carousel _-- nice to have_  
 * ❌  Update existing series with new images _-- nice to have_  
 
