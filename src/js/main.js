@@ -57,12 +57,14 @@ function getMyLocation(position) {
 
     const locationInput = document.getElementById("location")
 
-    // const testURL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=-123&longitude=11&localityLanguage=en'
+    // somehwere in france with no city 
+    // const testURL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=49.3811&longitude=48.7839&localityLanguage=en'
+
     const fetchUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + long + '&localityLanguage=en'
 
     getData(fetchUrl)
         .then(data => {
-
+            console.log(data.city)
             testData(data, locationInput);
             console.timeEnd('Get location')
         })
@@ -77,7 +79,7 @@ function testData(data, inputField) {
 
         // add city to input value of location
         inputField.value = data.city
-    } else if (data.city === undefined) {
+    } else if (data.city === undefined || data.city.length < 1 || data.city === "" || data.city === null) {
         // should be error instead of placeholder ofcours.. just testing
         const locationSpinner = document.querySelector('.locationWrap');
         locationSpinner.classList.remove('loading');
