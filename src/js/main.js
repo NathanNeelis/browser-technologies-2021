@@ -64,7 +64,7 @@ function getMyLocation(position) {
 
     getData(fetchUrl)
         .then(data => {
-            console.log(data.city)
+            console.log(data)
             testData(data, locationInput);
             console.timeEnd('Get location')
         })
@@ -79,7 +79,29 @@ function testData(data, inputField) {
 
         // add city to input value of location
         inputField.value = data.city
-    } else if (data.city === undefined || data.city.length < 1 || data.city === "" || data.city === null) {
+    } else if (data.locality) {
+        // If location is found remove loading spinner
+        const locationSpinner = document.querySelector('.locationWrap');
+        locationSpinner.classList.remove('loading');
+
+        // add locality to input value of location
+        inputField.value = data.locality
+
+    } else if (data.principalSubdivision) {
+        // If location is found remove loading spinner
+        const locationSpinner = document.querySelector('.locationWrap');
+        locationSpinner.classList.remove('loading');
+
+        // add principal subdivision to input value of location
+        inputField.value = data.principalSubdivision
+    } else if (data.countryName) {
+        // If location is found remove loading spinner
+        const locationSpinner = document.querySelector('.locationWrap');
+        locationSpinner.classList.remove('loading');
+
+        // add countryname to input value of location
+        inputField.value = data.countryName
+    } else {
         // should be error instead of placeholder ofcours.. just testing
         const locationSpinner = document.querySelector('.locationWrap');
         locationSpinner.classList.remove('loading');
