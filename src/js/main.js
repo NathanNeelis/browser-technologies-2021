@@ -1,37 +1,63 @@
 // If javascript is enabled set input field op display none;
 const dragDropCheck = document.querySelector('.drop-zone')
 
-if (dragDropCheck) {
-    uploadImageFailsave()
-
-    if (navigator.geolocation) {
-        const getLocation = document.getElementById('getLocation')
+if (navigator.geolocation) {
+    const getLocation = document.getElementById('getLocation')
+    if (getLocation) { // checks if element is on current page
         getLocation.addEventListener('click', clickForLocation)
     }
+}
 
-    // get geo location only when its triggered in click event
-    function clickForLocation() {
-        navigator.geolocation.getCurrentPosition(getMyLocation)
-        const locationInput = document.getElementById("location")
-        locationInput.placeholder = "Loading data..."
+// get geo location only when its triggered in click event
+function clickForLocation() {
+    console.time('timer');
+    navigator.geolocation.getCurrentPosition(getMyLocation);
+
+    // removes placeholder on loading
+    const locationInput = document.getElementById("location");
+    locationInput.placeholder = "";
+
+    // adds loading spinner on loading
+    const locationSpinner = document.querySelector('.locationWrap');
+    locationSpinner.classList.add('loading');
+}
+
+// get GEO location
+function getMyLocation(position) {
+    let long = position.coords.longitude;
+    let lat = position.coords.latitude;
+
+    const locationInput = document.getElementById("location")
+
+    // const testURL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=-123&longitude=11&localityLanguage=en'
+    const fetchUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + long + '&localityLanguage=en'
+
+    getData(fetchUrl)
+        .then(data => {
+
+            testData(data, locationInput);
+            console.timeEnd('timer')
+        })
+}
+
+
+function testData(data, inputField) {
+    if (data.city) {
+        // If location is found remove loading spinner
+        const locationSpinner = document.querySelector('.locationWrap');
+        locationSpinner.classList.remove('loading');
+
+        // add city to input value of location
+        inputField.value = data.city
+    } else if (data.city === undefined) {
+        // should be error instead of placeholder ofcours.. just testing
+        inputField.placeholder = 'Your location can not be found, please type in manually'
     }
+}
 
-    // get GEO location
-    function getMyLocation(position) {
-        let long = position.coords.longitude;
-        let lat = position.coords.latitude;
 
-        const locationInput = document.getElementById("location")
-
-        // const testURL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=-123&longitude=11&localityLanguage=en'
-        const fetchUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + long + '&localityLanguage=en'
-
-        getData(fetchUrl)
-            .then(data => {
-                testData(data, locationInput);
-            })
-    }
-
+if (dragDropCheck) {
+    uploadImageFailsave()
 
     function uploadImageFailsave() {
         const inputField = document.querySelector('.drop-zone_input')
@@ -134,14 +160,4 @@ async function getData(url) {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-}
-
-
-function testData(data, inputField) {
-    if (data.city) {
-        inputField.value = data.city
-    } else if (data.city === undefined) {
-        // should be error instead of placeholder ofcours.. just testing
-        inputField.placeholder = 'Your location can not be found, please try again later'
-    }
 }

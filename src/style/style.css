@@ -195,20 +195,42 @@ textarea:focus {
 }
 
 /* LOCATION ZONE  */
-.locationWrap {}
 
-.locationWrap>article {
+.locationWrap {
     width: 100%;
     border: 1px solid var(--darkgray);
     height: 2.05rem;
     border-radius: .3rem;
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
     margin-bottom: 1rem;
+    position: relative;
 }
 
-.locationWrap>article>input {
+.locationWrap.loading::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - .45rem);
+    left: .4rem;
+    border: 0.15rem solid var(--darkgray);
+    border-top-color: var(--red);
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    animation: spinner 1s linear 0s infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+.locationWrap input {
     width: 93%;
     border: none;
     box-shadow: none;
@@ -216,7 +238,7 @@ textarea:focus {
 
 }
 
-.locationWrap>article>input:focus {
+.locationWrap input:focus {
     box-shadow: none;
     outline: none;
 }
@@ -231,15 +253,13 @@ textarea:focus {
     margin-left: .2rem;
 }
 
-.locationWrap article:focus-within {
+.locationWrap:focus-within {
     box-shadow: 0 0 1px 1px var(--red);
-    /* outline: 1px solid blue; */
     border-radius: .3rem;
 }
 
 .locationWrap svg {
     height: 80%;
-    /* width: 1.5rem; */
 }
 
 
