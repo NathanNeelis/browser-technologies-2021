@@ -25,12 +25,12 @@ function geoError(err) {
 }
 
 
-// if (navigator.geolocation) {
-const getLocation = document.getElementById('getLocation')
-if (getLocation) { // checks if element is on current page
-    getLocation.addEventListener('click', clickForLocation)
+if (navigator.geolocation) {
+    const getLocation = document.getElementById('getLocation')
+    if (getLocation) { // checks if element is on current page
+        getLocation.addEventListener('click', clickForLocation)
+    }
 }
-// }
 
 // get geo location only when its triggered in click event
 function clickForLocation() {
@@ -79,6 +79,9 @@ function testData(data, inputField) {
         inputField.value = data.city
     } else if (data.city === undefined) {
         // should be error instead of placeholder ofcours.. just testing
+        const locationSpinner = document.querySelector('.locationWrap');
+        locationSpinner.classList.remove('loading');
+
         inputField.placeholder = 'Your location can not be found, please type in manually'
     }
 }
