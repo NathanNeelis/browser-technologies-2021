@@ -216,7 +216,7 @@ Below here is a data object that is fetched from my own current location. The va
 }
 ```
 </details>
-
+  
 As I live on the edge of Alkmaar this worked wonderfully in the browser, but when I started testing on my mobile, it wouldnt work. In the image below I am testing it on a Android phone via browserstack. I also tested on a real Android phone, which worked better but I couldnt save it in a gif. What you see happening here is that I am trying to locate myself, but it gets stuck on 'loading data'. This is because when you click the button, it changes to placeholder to loading data, and when it finds your location updates the value of the input with our location. But that wasnt happening.  
   
 ![Geolocation_LoadingData_Android_Moz](https://user-images.githubusercontent.com/55492381/112483909-c1634600-8d79-11eb-8bf6-61507d03978f.gif)  
@@ -250,6 +250,56 @@ Some of my tries to fetch my data where extremely slow, to get more insight in t
 The Brave browser was alot quicker, but it might have still cached my location somewhere though.  
   
 ![Geolocation_MBP_Brave](https://user-images.githubusercontent.com/55492381/112486235-fc667900-8d7b-11eb-8142-b0911028cb3f.gif)  
+
+</details>
+  
+  #### Drag & Drop
+<details>
+<summary>Test report Drag & Drop</summary>
+  
+So in my form I wanted to have a drag and drop when you upload your photograph to the story. But I found out, that for drag and drop you actually don't have to do anything! Drag and drop usually works on input type=fyle elements. But I wanted to take it to the next level. The drag and drop box was kind of small so I styled the whole thing for usability. Now there is a big enough space to drop your photo in. And as you see later in the gif examples, whenever you drag a file into the box the dashed line becomes solid. This is the feedback to the user I was looking for in my usable layer. But to really lift this drag and drop box to the next level I added a pleasureable layer. When you drop a photo in it, you get a thumbnial view from the image you are uploading with the file name. How cool is that! Below here an example of my testing on my MacbookPro in Chrome.  
+  
+![DragDrop_MBP_Chrome](https://user-images.githubusercontent.com/55492381/112491021-320d6100-8d80-11eb-83c6-3fbe2ab777c6.gif)  
+  
+So that worked smoothly! Does it work as well in Brave? Well I though it did!  
+  
+![DragDrop_MBP_Brave](https://user-images.githubusercontent.com/55492381/112491288-7567cf80-8d80-11eb-8c5d-d6a4918eacf3.gif)  
+  
+I found a video that explained this very well every step of the way. But the author put his input on display none, and worked with the label. So when I tried tabbing through my form, it skipped the drag and drop field.. That's a pretty poor experience. So I styled it properly, and now it is accessible as well!  
+  
+![DragDrop_FocusStyles](https://user-images.githubusercontent.com/55492381/112491625-c8418700-8d80-11eb-8492-7bc7bd3cd11a.gif)  
+  
+This drag and drop system is great! But when you are on a mobile device, you dont really have anything to drag into the dropzone. So to serve these users as well you can also just click on the dropzone to upload your photograph. And when I tested this on a mobile device, you don't actually have to search for your file, but you can just take your photograph as well! How handy is that when you're somewhere high up in the mountains! I tested this on IOS and Andriod, but it worked on both devices just as well.
+  
+![DragDrop_IOS_Safari](https://user-images.githubusercontent.com/55492381/112491962-1f475c00-8d81-11eb-9180-c1062b4d77cf.gif)  
+  
+Well this whole drag and drop is alot of client-side javascript. What if for some reason it is disabled? Well I also tested this, below in the gif you can see the example in chrome. If javascript is turned off, you will just get the original input field. When you load your javascript it adds classes to the dropzone fields. So it becomes active. If javascript isn't loaded, it won't add those classes so you dont get a label field that is no use at all.
+  
+```javascript
+// If javascript is enabled set input field op display none;
+const dragDropCheck = document.querySelector('.drop-zone')
+
+if (dragDropCheck) {
+    uploadImageFailsave()
+
+    function uploadImageFailsave() {
+        const inputField = document.querySelector('.drop-zone_input')
+        const dropzone = document.querySelector('.drop-zone')
+        const inputText = document.querySelector('.drop-zone_text')
+
+        inputField.classList.add('active'); // adds standard input field
+        dropzone.classList.add('active'); // adds styling for drag and drop section
+        inputText.classList.add('active'); // adds drag and drop text
+
+    }
+
+    ... Drag and drop javascript code
+
+}
+```
+
+![DragDrop_NoJS](https://user-images.githubusercontent.com/55492381/112492505-9aa90d80-8d81-11eb-873a-778fdb505f71.gif)  
+
 
 </details>
 
