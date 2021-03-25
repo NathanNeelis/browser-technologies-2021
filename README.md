@@ -115,6 +115,143 @@ Changing views from slide-show to carousel and updating the order of the saved i
 
 
 ### Testing report
+#### Geolocation
+<details>
+  <summary>Test report Geolocation</summary>
+
+I enhanched my location input with a button that saves your location in your input. I did this by using the geolocation api to fetch the longitude and latitude values of your current location. These values get passed into another fetch for reverse geocoding which transforms the data into a location by for example a city.
+Below here is a data object that is fetched from my own current location. The value that should get passed in the location input is the city.
+
+<details>
+  <summary>Example Geolocation file</summary>
+
+```json
+{
+  "latitude": 52.6682014465332,
+  "longitude": 4.764900207519531,
+  "lookupSource": "coordinates",
+  "plusCode": "9F46MQ97+7X",
+  "localityLanguageRequested": "en",
+  "continent": "Europe",
+  "continentCode": "EU",
+  "countryName": "Kingdom of the Netherlands",
+  "countryCode": "NL",
+  "principalSubdivision": "North Holland",
+  "principalSubdivisionCode": "NL-NH",
+  "city": "Alkmaar",
+  "locality": "Alkmaar",
+  "postcode": "",
+  "localityInfo": {
+    "administrative": [
+      {
+        "order": 3,
+        "adminLevel": 2,
+        "name": "Kingdom of the Netherlands",
+        "description": "sovereign state in Western Europe and the Caribbean",
+        "isoName": "Netherlands (the)",
+        "isoCode": "NL",
+        "wikidataId": "Q29999",
+        "geonameId": 2750405
+      },
+      {
+        "order": 4,
+        "adminLevel": 3,
+        "name": "Netherlands",
+        "description": "country mostly in Northern Europe and largest country of the Kingdom of the Netherlands",
+        "wikidataId": "Q55"
+      },
+      {
+        "order": 5,
+        "adminLevel": 4,
+        "name": "North Holland",
+        "description": "province of the Netherlands",
+        "isoName": "Noord-Holland",
+        "isoCode": "NL-NH",
+        "wikidataId": "Q701",
+        "geonameId": 2749879
+      },
+      {
+        "order": 8,
+        "adminLevel": 8,
+        "name": "Alkmaar",
+        "description": "municipality in the province of North Holland, the Netherlands",
+        "wikidataId": "Q972",
+        "geonameId": 2759898
+      },
+      {
+        "order": 9,
+        "adminLevel": 10,
+        "name": "Alkmaar",
+        "description": "city in Noord-Holland, the Netherlands",
+        "wikidataId": "Q16977290",
+        "geonameId": 2759899
+      }
+    ],
+    "informative": [
+      {
+        "order": 1,
+        "name": "Europe",
+        "description": "continent on Earth, mainly on the northeastern quadrant, i.e. north-western Eurasia",
+        "isoCode": "EU",
+        "wikidataId": "Q46",
+        "geonameId": 6255148
+      },
+      {
+        "order": 2,
+        "name": "North European Plain",
+        "description": "geomorphological region in Europe",
+        "wikidataId": "Q560549"
+      },
+      {
+        "order": 6,
+        "name": "Hollands Noorderkwartier"
+      },
+      {
+        "order": 7,
+        "name": "Noord-Holland-Noord",
+        "description": "safety region"
+      }
+    ]
+  }
+}
+```
+</details>
+
+As I live on the edge of Alkmaar this worked wonderfully in the browser, but when I started testing on my mobile, it wouldnt work. In the image below I am testing it on a Android phone via browserstack. I also tested on a real Android phone, which worked better but I couldnt save it in a gif. What you see happening here is that I am trying to locate myself, but it gets stuck on 'loading data'. This is because when you click the button, it changes to placeholder to loading data, and when it finds your location updates the value of the input with our location. But that wasnt happening.  
+  
+![Geolocation_LoadingData_Android_Moz](https://user-images.githubusercontent.com/55492381/112483909-c1634600-8d79-11eb-8bf6-61507d03978f.gif)  
+  
+I also wasnt to happy with the placeholder being changed in loading data. I wanted to update the usable layer here, so the user would get better feedback. I removed the placeholder and added a spinner. But the location issue is still here. Once you hit the button, it keeps spinning instead of updating the input value. Funny thing is, it did update in my browser on my macbook.  
+  
+![Geolocation_Spinner_Android_Moz](https://user-images.githubusercontent.com/55492381/112484327-2159ec80-8d7a-11eb-8fe6-a934a0da5cf9.gif)  
+  
+I guess, this is one of those big reasons you test on multiple devices and on multiple browsers. I found out what the issue was, and fixed it. It turned out I was looking for the city, but if you werent in a city, it gave a response of an empty string. So I wrote some extra if statements that if there isnt a city available, fetch other data like locality, prinicipal subdivision or even country. If all of those are not found, then give the user feedback the location can't be found. Below here I have added a use case of a faulty location. You see the placeholder being updated with a message that the location cannot be found. I know this isnt the most beautifull way of giving the user feedback, but that's a thing for later to be updated.  
+  
+![Geolocation_Error_MBP_Chrome](https://user-images.githubusercontent.com/55492381/112484884-a218e880-8d7a-11eb-8e50-7c214415972c.gif)  
+  
+So after this update the geolocation worked wonderful in most testcases; MacbookPro - Chrome, Macbookpro - Brave, Android - Mozzila Firefox. But it doesnt work in IOS Safari. Below here opened a Iphone 8 in a browserstack with the console log open to see whats happening. It turns out the geolocation is just denied. The same is happening on my MacbookPro in safari. It might be a setting somewhere, but I couldnt find it.  
+  
+![Geolocation_IOS_Safari](https://user-images.githubusercontent.com/55492381/112485440-3be09580-8d7b-11eb-9bc1-abbbb6dafc73.gif)  
+
+Because not everyone has geolocation enabled, and I didnt want it to break the rest of my Javascript checked if the geolocation is available in the browser.
+```javascript
+if (navigator.geolocation) { // checks if geolocation is available in the browser
+    const getLocation = document.getElementById('getLocation')
+    if (getLocation) { // checks if element is on current page
+        getLocation.addEventListener('click', clickForLocation)
+    }
+}
+```
+
+Some of my tries to fetch my data where extremely slow, to get more insight in this I console timed the events of fetching the geolocation and the reverse geocoding. In the gif below you see that I am testing this feature on my MacbookPro in the Chrome browser. In the console you can see how long it took to get this data.  
+  
+![Geolocation_MBP_Chrome](https://user-images.githubusercontent.com/55492381/112486099-dfca4100-8d7b-11eb-8337-45f219aef033.gif)  
+  
+The Brave browser was alot quicker, but it might have still cached my location somewhere though.  
+  
+![Geolocation_MBP_Brave](https://user-images.githubusercontent.com/55492381/112486235-fc667900-8d7b-11eb-8142-b0911028cb3f.gif)  
+
+</details>
 
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
@@ -147,3 +284,7 @@ Changing views from slide-show to carousel and updating the order of the saved i
 [drag and drop](https://www.youtube.com/watch?v=Wtrin7C4b7w)  
 [icon for logo](https://thenounproject.com/search/?q=Photo&i=2059604)  
 [icon for location](https://thenounproject.com/search/?q=location&i=3805844)  
+[geo location error](https://stackoverflow.com/questions/57130901/getcurrentposition-in-js-does-not-work-on-ios)  
+[Js tips article from Thijs](https://dev.to/daliboru/5-neat-javascript-tips-284o?utm_source=digest_mailer&utm_medium=email&utm_campaign=digest_email)  
+[spinner](https://codepen.io/alaa-sufi/pen/MWbYdeb)  
+[reverse geocoding](https://www.bigdatacloud.com/blog/convert-getcurrentposition-free-reversegeocoding-api)
