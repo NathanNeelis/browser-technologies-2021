@@ -1,6 +1,31 @@
 // If javascript is enabled set input field op display none;
 const dragDropCheck = document.querySelector('.drop-zone')
 
+
+
+
+// GEO LOCATION
+let geolocationOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
+function geoError(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+    console.log(err)
+    if (err) {
+        const locationInput = document.getElementById("location");
+        locationInput.placeholder = 'Your location can not be found, please type in manually'
+
+        const locationSpinner = document.querySelector('.locationWrap');
+        locationSpinner.classList.remove('loading');
+
+    }
+
+}
+
+
 if (navigator.geolocation) {
     const getLocation = document.getElementById('getLocation')
     if (getLocation) { // checks if element is on current page
@@ -10,8 +35,9 @@ if (navigator.geolocation) {
 
 // get geo location only when its triggered in click event
 function clickForLocation() {
-    console.time('timer');
-    navigator.geolocation.getCurrentPosition(getMyLocation);
+    console.time('Get location');
+    console.time('Get coordinates');
+    navigator.geolocation.getCurrentPosition(getMyLocation, geoError, geolocationOptions);
 
     // removes placeholder on loading
     const locationInput = document.getElementById("location");
@@ -24,8 +50,11 @@ function clickForLocation() {
 
 // get GEO location
 function getMyLocation(position) {
-    let long = position.coords.longitude;
-    let lat = position.coords.latitude;
+    const coords = position.coords;
+    const long = coords.longitude;
+    const lat = coords.latitude;
+
+    console.timeEnd('Get coordinates')
 
     const locationInput = document.getElementById("location")
 
@@ -36,7 +65,7 @@ function getMyLocation(position) {
         .then(data => {
 
             testData(data, locationInput);
-            console.timeEnd('timer')
+            console.timeEnd('Get location')
         })
 }
 
@@ -54,6 +83,8 @@ function testData(data, inputField) {
         inputField.placeholder = 'Your location can not be found, please type in manually'
     }
 }
+
+
 
 
 if (dragDropCheck) {
