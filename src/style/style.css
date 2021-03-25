@@ -36,7 +36,7 @@ nav>ul>li {
     padding: 1rem 1.5rem;
 }
 
-li:first-child {
+nav>ul>li:first-child {
     flex-grow: 1;
     position: relative;
     padding: .5rem 2rem 0 2rem;
@@ -58,13 +58,13 @@ nav a:focus {
 }
 
 /* logo in menu */
-nav li:first-child figure svg {
+header>nav li:first-child figure svg {
     width: 2rem;
     transform: scale(1);
     transition: transform .75s ease;
 }
 
-nav li:first-child figure svg:hover {
+header>nav li:first-child figure svg:hover {
     transform: scale(.6) rotate(1turn);
 }
 
@@ -85,15 +85,22 @@ nav li:first-child figure svg:hover {
     align-items: start;
 }
 
-.grid-masonry article {
+.grid-masonry li {
     color: lightgray;
-
-
+    list-style: none;
 }
 
 
-article a {
+.grid-masonry a {
     text-decoration: none;
+}
+
+.grid-masonry li:focus-within {
+    box-shadow: 0 0 1px 1px var(--red);
+}
+
+.grid-masonry a:focus {
+    outline: none;
 }
 
 
@@ -103,14 +110,11 @@ article a {
     background: var(--lightgray);
     border-radius: .5rem;
     display: block;
-}
-
-.grid-masonry article img {
     transition: transform .5s ease;
     transform-origin: bottom center;
 }
 
-.grid-masonry article:hover img {
+.grid-masonry li:hover img {
     /* transform: scale(1.01); */
     transform: translateY(-3px);
 }
@@ -340,8 +344,6 @@ input[type=file] {
     color: var(--darkgray);
 }
 
-
-
 /* UPLOAD BUTTON  */
 
 .uploadLabel {
@@ -370,6 +372,14 @@ input[type=file] {
     outline: 3px dashed var(--red);
     /* box-shadow: 0 0 1px 1px var(--red); */
 }
+
+
+/* detaip page */
+
+
+
+
+
 
 /* BREAK POINTS  */
 
