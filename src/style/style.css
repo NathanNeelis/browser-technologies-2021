@@ -531,7 +531,6 @@ input[type=file] {
     border: none;
 }
 
-
 #seriePhotoSubmitLabel {
     background: var(--red);
     display: inline-block;
@@ -540,6 +539,10 @@ input[type=file] {
     color: white;
     border-radius: .5rem;
     transition: background-color .5s ease;
+}
+
+#seriePhotoSubmitLabel.disabled {
+    display: none;
 }
 
 #seriePhotoSubmitLabel:hover {

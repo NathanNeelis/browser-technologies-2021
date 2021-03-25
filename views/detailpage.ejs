@@ -14,7 +14,7 @@
             <p>Photograph location: <%= data.location%></p>
             <p>Description: <%= data.description%></p>
 
-            <form action="/<%=data._id%>" method="post">
+            <form action="/<%=data._id%>" method="post" name="addToSerie" id="addToSerie">
                 <!-- <fieldset> -->
                 <!-- <legend>Add photograph to your series</legend> -->
                 <% if (data.series) { %>

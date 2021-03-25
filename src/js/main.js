@@ -219,3 +219,17 @@ async function getData(url) {
     const data = await response.json();
     return data;
 }
+
+
+
+
+// If checkbox is checked, submit form
+const checkBox = document.getElementById('addPhotoBox');
+if (checkBox) {
+    console.log(checkBox)
+    const submitLabel = document.getElementById('seriePhotoSubmitLabel')
+    submitLabel.classList.add('disabled')
+    checkBox.addEventListener('click', e => {
+        document.addToSerie.submit();
+    })
+}
