@@ -1,19 +1,18 @@
 <%- include('includes/head.ejs'); %>
 <%- include('includes/header.ejs'); %>
 <main>
-    <section class="grid-masonry">
+    <ul class="grid-masonry">
         <% for (let i = 0; i < data.length; i++) { %>
-        <article id="<%=data[i]._id%>">
+        <li id="<%=data[i]._id%>">
             <a href="/<%=data[i]._id%>">
                 <figure>
                     <img src="uploads/<%=data[i].image%>" alt="<%=data[i].title%>" width="300">
                     <figcaption><%= data[i].title %></figcaption>
                 </figure>
             </a>
-
-        </article>
+        </li>
         <% } %>
-    </section>
+    </ul>
 </main>
 
 <%- include('includes/footer.ejs'); %>
