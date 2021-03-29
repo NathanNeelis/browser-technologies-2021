@@ -447,3 +447,4 @@ if (dragDropCheck) {
 [Js tips article from Thijs](https://dev.to/daliboru/5-neat-javascript-tips-284o?utm_source=digest_mailer&utm_medium=email&utm_campaign=digest_email)  
 [spinner](https://codepen.io/alaa-sufi/pen/MWbYdeb)  
 [reverse geocoding](https://www.bigdatacloud.com/blog/convert-getcurrentposition-free-reversegeocoding-api)
+[@ supports](https://developer.mozilla.org/en-US/docs/Web/CSS/@supports)  

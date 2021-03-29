@@ -26,8 +26,12 @@ function geoError(err) {
 
 
 if (navigator.geolocation) { // checks if geolocation is available in the browser
+
+
     const getLocation = document.getElementById('getLocation')
     if (getLocation) { // checks if element is on current page
+        const locationIcon = document.getElementById('location_icon');
+        locationIcon.classList.add('active');
         getLocation.addEventListener('click', clickForLocation)
     }
 }
@@ -226,10 +230,65 @@ async function getData(url) {
 // If checkbox is checked, submit form
 const checkBox = document.getElementById('addPhotoBox');
 if (checkBox) {
-    console.log(checkBox)
     const submitLabel = document.getElementById('seriePhotoSubmitLabel')
     submitLabel.classList.add('disabled')
     checkBox.addEventListener('click', e => {
         document.addToSerie.submit();
     })
+}
+
+
+const homePage = document.querySelector('.homePage');
+const seriePage = document.querySelector('.seriePage');
+const uploadPage = document.querySelector('.uploadPage');
+const navigation = document.querySelectorAll('nav>ul>li')
+
+selectedPage(homePage, seriePage, uploadPage, navigation)
+
+function selectedPage(home, serie, upload, nav) {
+    if (home) {
+        nav[0].classList.add('position')
+    } else if (serie) {
+        nav[1].classList.add('position')
+    } else if (upload) {
+        nav[2].classList.add('position')
+    }
+}
+
+
+
+const photoSelection = document.querySelectorAll('.selectWrapper a')
+// console.log(photoSelection)
+if (photoSelection) {
+    const selectWrapper = document.querySelector('.selectWrapper');
+    const scroll = document.querySelector('.scroll-container');
+    selectWrapper.classList.add('active');
+    scroll.classList.add('active');
+
+
+
+
+    photoSelection.forEach((selection, index) => {
+        selection.setAttribute('href', '#' + photoSelection[index].id)
+        photoSelection[0].classList.add('selected');
+
+        photoSelection[index].addEventListener('click', e => {
+            console.log(photoSelection[0])
+            photoSelection.forEach((selected) => {
+                removeClass(selected)
+            })
+
+            addSelectedClass(selection);
+        })
+
+    })
+
+    function removeClass(target) {
+        target.classList.remove('selected');
+    }
+
+    function addSelectedClass(target) {
+        target.classList.add('selected');
+    }
+
 }

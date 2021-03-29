@@ -1,18 +1,25 @@
 <%- include('includes/head.ejs'); %>
 <%- include('includes/header.ejs'); %>
-<main>
-    <ul class="grid-masonry">
+<main class="seriePage">
+    <h1>Your selected photo serie</h1>
+    <ul class="scroll-container">
         <% for (let i = 0; i < data.length; i++) { %>
         <li id="<%=data[i]._id%>">
-            <a href="/<%=data[i]._id%>">
-                <figure>
-                    <img src="uploads/<%=data[i].image%>" alt="<%=data[i].title%>" width="300">
-                    <figcaption><%= data[i].title %></figcaption>
-                </figure>
-            </a>
+            <figure>
+                <img src="uploads/<%=data[i].image%>" alt="<%=data[i].title%>" width="300">
+            </figure>
         </li>
+
         <% } %>
     </ul>
+    <div class="selectWrapper">
+        <% for (let i = 0; i < data.length; i++) { %>
+        <a id="<%=data[i]._id%>" href="">
+            <div></div>
+        </a>
+        <% } %>
+    </div>
+
 </main>
 
 <%- include('includes/footer.ejs'); %>

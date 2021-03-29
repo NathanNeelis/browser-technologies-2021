@@ -33,15 +33,13 @@ nav ul {
     margin: 0 auto;
 }
 
+nav svg {
+    margin-top: 1rem;
+}
+
 nav>ul>li {
     list-style: none;
     padding: 1rem 1.5rem;
-}
-
-nav>ul>li:first-child {
-    flex-grow: 1;
-    position: relative;
-    padding: .5rem 2rem 0 2rem;
 }
 
 nav a {
@@ -59,14 +57,19 @@ nav a:focus {
     outline: 1px dashed var(--red);
 }
 
+.position a {
+    /* color: var(--red); */
+    border-bottom: 1px solid var(--red);
+}
+
 /* logo in menu */
-header>nav li:first-child figure svg {
+nav>ul>a figure svg {
     width: 2rem;
     transform: scale(1);
     transition: transform .75s ease;
 }
 
-header>nav li:first-child figure svg:hover {
+nav>ul>a figure svg:hover {
     transform: scale(.6) rotate(1turn);
 }
 
@@ -251,6 +254,16 @@ textarea:focus {
     height: .7rem;
     border-radius: 50%;
     animation: spinner 1s linear 0s infinite;
+}
+
+#location_icon {
+    display: none;
+}
+
+#location_icon.active {
+    display: block;
+    fill: var(--red);
+    width: 75%;
 }
 
 @keyframes spinner {
@@ -474,6 +487,7 @@ input[type=file] {
 .detailPage label {
     display: inline-block;
     padding: 1rem 2rem;
+    margin-bottom: 1rem;
     border-radius: .5rem;
     position: relative;
 }
@@ -481,9 +495,6 @@ input[type=file] {
 .detailPage label:first-of-type {
     padding: 1rem 2rem 1rem 3rem;
     position: relative;
-    /* display: flex; */
-    /* align-items: center; */
-    /* display: inline-block; */
 }
 
 .detailPage input[type=checkbox]:focus+label {
@@ -675,6 +686,96 @@ input[type=file] {
     border: 1px solid white;
 }
 
+
+
+/* serie page carousel */
+
+@supports(scroll-behavior: smooth) {
+    .scroll-container {
+        scroll-behavior: smooth;
+    }
+}
+
+@supports (scroll-snap-type: x mandatory) {
+    .scroll-container {
+        scroll-snap-type: x mandatory;
+    }
+
+    .seriePage ul li {
+        scroll-snap-align: center;
+
+    }
+
+}
+
+.scroll-container {
+    width: 100vw;
+    max-height: 43vh;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    margin: 1.5rem auto;
+    border-radius: .5rem;
+
+    display: flex;
+    align-items: center;
+    -webkit-overflow-scrolling: touch;
+    transition: all .5s ease;
+
+
+
+}
+
+.seriePage h1 {
+    color: var(--darkgray);
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.17em;
+}
+
+.seriePage ul li {
+    list-style: none;
+
+}
+
+.seriePage img {
+    width: 100vw;
+}
+
+
+
+
+.scroll-container::-webkit-scrollbar {
+    width: 5px;
+    /* height: 15px; */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border-top: 8px solid white;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: white;
+}
+
+.selectWrapper {
+    display: none;
+}
+
+.selectWrapper div {
+    width: 1rem;
+    height: 1rem;
+    background: var(--darkgray);
+    border-radius: 50%;
+    margin: 0 .5rem;
+}
+
+.selectWrapper a.selected div {
+    background: var(--red);
+    transition: all .5s ease;
+}
+
+
 /* BREAK POINTS  */
 
 @media all and (min-width: 21rem) {
@@ -710,13 +811,10 @@ input[type=file] {
     }
 
 
-    nav ul {
-        flex-direction: row;
-    }
-
     .detailPage label:first-of-type:before {
         top: .5rem;
     }
+
 
 
 }
@@ -729,6 +827,14 @@ input[type=file] {
     nav>ul>li {
         list-style: none;
         padding: 1rem 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: row;
+    }
+
+    nav>ul>a {
+        flex-grow: 1;
     }
 
     .detailPage,
@@ -744,12 +850,8 @@ input[type=file] {
 
     .detailPage img,
     .editPage img {
-        /* height: 30rem; */
         width: 30rem;
         height: 100%;
-        /* position: absolute; */
-        /* left: 20%; */
-        /* border-radius: .5rem 0 0 .5rem; */
         padding: 0;
         margin: 0 0;
         border-radius: .5rem;
@@ -782,6 +884,48 @@ input[type=file] {
         width: 45%;
     }
 
+
+    .scroll-container {
+        width: min(60rem, 100%);
+        max-height: 60vh;
+        align-items: center;
+        overflow-x: scroll;
+    }
+
+    .scroll-container.active {
+        overflow-x: hidden;
+        box-shadow: 0px 0px 13px -1px #8C8C8C;
+
+    }
+
+    .seriePage img {
+        width: 60rem;
+    }
+
+    .selectWrapper.active {
+        width: min(60rem, 100%);
+        height: 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .selectWrapper a:hover div {
+        background: var(--red);
+        transition: all .5s ease;
+    }
+
+
+    .selectWrapper a:focus div {
+        background: var(--red);
+        transition: all .5s ease;
+    }
+
+    .selectWrapper a:focus {
+        outline: 1px dashed var(--red);
+    }
 
 }
 
