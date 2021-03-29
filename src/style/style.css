@@ -95,6 +95,28 @@ nav>ul>a figure svg:hover {
     list-style: none;
 }
 
+/* UPLOADING NEW IMAGE  */
+.grid-masonry li.showNewest img {
+    animation-name: showNewImage;
+    animation-duration: 10s;
+    animation-iteration-count: 1;
+    animation-fill-mode: backwards;
+}
+
+
+
+@keyframes showNewImage {
+    from {
+        opacity: .7;
+        border: 2px solid var(--red);
+    }
+
+    to {
+        opacity: 1;
+        border: 2px solid white;
+    }
+}
+
 
 .grid-masonry a {
     text-decoration: none;

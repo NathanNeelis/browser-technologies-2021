@@ -9,7 +9,7 @@ This app is an online photo album. In the app you can scroll through all the upl
 You can view all the details by clicking on the image which will send you to the detail page. 
 Also in this app you can make a selection of photo's to add to a serie and view this serie as a slideshow or in a carousel. Do you want your images added to this app? Simply upload them! Made a mistake? Go to the detailed page to edit its content.  
   
-  -- image  
+![PhotoAlbum](https://user-images.githubusercontent.com/55492381/112881609-31503400-90cc-11eb-9094-3c2e0aaf18fa.png)
     
 
 

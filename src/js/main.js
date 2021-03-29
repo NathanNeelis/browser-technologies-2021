@@ -237,7 +237,7 @@ if (checkBox) {
     })
 }
 
-
+// Navigation add red line under location in navigation
 const homePage = document.querySelector('.homePage');
 const seriePage = document.querySelector('.seriePage');
 const uploadPage = document.querySelector('.uploadPage');
@@ -293,4 +293,15 @@ if (seriePage) {
         target.classList.add('selected');
     }
 
+}
+
+
+
+
+const queryString = window.location.search;
+
+if (queryString === '?newimage') {
+    const newestImage = document.querySelectorAll('.grid-masonry>li:first-child')
+    console.log(newestImage)
+    newestImage[0].classList.add('showNewest')
 }

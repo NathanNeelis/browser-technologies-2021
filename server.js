@@ -109,11 +109,11 @@ function add(req, res, next) {
         renderPage()
     );
 
-    function renderPage(err, data) {
+    function renderPage(err) {
         if (err) {
             next(err);
         } else {
-            res.redirect("/");
+            res.redirect("/?newimage");
         }
     }
 }
