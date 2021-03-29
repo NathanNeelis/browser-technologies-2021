@@ -423,12 +423,12 @@ if (dragDropCheck) {
 * ✅  Add enhancement 1: Drag and drop _-- must have_ 
 * ✅  Add enhancement 2: Geolocation _-- must have_ 
 * ✅  Test enhancements in browsers _-- must have_ 
+* ✅  View image in series in carousel _-- nice to have_ 
 * ✅  Finsih readme _-- must have_ 
 
 * ❌  Grid masonry _-- nice to have_  
 * ❌  Create other/new series page _-- nice to have_  
 * ❌  View images in series in slideshow _-- nice to have_   
-* ❌  View image in series in carousel _-- nice to have_  
 * ❌  Update existing series with new images _-- nice to have_  
 
 
@@ -446,5 +446,5 @@ if (dragDropCheck) {
 [geo location error](https://stackoverflow.com/questions/57130901/getcurrentposition-in-js-does-not-work-on-ios)  
 [Js tips article from Thijs](https://dev.to/daliboru/5-neat-javascript-tips-284o?utm_source=digest_mailer&utm_medium=email&utm_campaign=digest_email)  
 [spinner](https://codepen.io/alaa-sufi/pen/MWbYdeb)  
-[reverse geocoding](https://www.bigdatacloud.com/blog/convert-getcurrentposition-free-reversegeocoding-api)
+[reverse geocoding](https://www.bigdatacloud.com/blog/convert-getcurrentposition-free-reversegeocoding-api)  
 [@ supports](https://developer.mozilla.org/en-US/docs/Web/CSS/@supports)  

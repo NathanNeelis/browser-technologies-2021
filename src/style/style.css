@@ -418,6 +418,7 @@ input[type=file] {
 }
 
 #uploadPhotograph {
+    -webkit-appearance: none;
     width: initial;
     height: initial;
     padding: 1rem 2rem;
