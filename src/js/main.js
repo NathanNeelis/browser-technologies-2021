@@ -256,24 +256,26 @@ function selectedPage(home, serie, upload, nav) {
 }
 
 
+// Photo carousel 
+if (seriePage) {
+    const photoSelection = document.querySelectorAll('.selectWrapper a')
 
-const photoSelection = document.querySelectorAll('.selectWrapper a')
-// console.log(photoSelection)
-if (photoSelection) {
+    // if javascript is enabled, add active classes. by default on display none.
     const selectWrapper = document.querySelector('.selectWrapper');
     const scroll = document.querySelector('.scroll-container');
     selectWrapper.classList.add('active');
     scroll.classList.add('active');
 
 
-
-
+    // for each photo, add link ref 
     photoSelection.forEach((selection, index) => {
         selection.setAttribute('href', '#' + photoSelection[index].id)
+
+        // gives first photo in series a red dot
         photoSelection[0].classList.add('selected');
 
+        // Removes all red dots in series and adds it to the clicked photograph
         photoSelection[index].addEventListener('click', e => {
-            console.log(photoSelection[0])
             photoSelection.forEach((selected) => {
                 removeClass(selected)
             })
