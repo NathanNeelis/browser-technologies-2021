@@ -1,16 +1,13 @@
-// If javascript is enabled set input field op display none;
-const dragDropCheck = document.querySelector('.drop-zone')
-
-
-
-
 // GEO LOCATION
+
+// Options
 let geolocationOptions = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0
 };
 
+// Error
 function geoError(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
     console.log(err)
@@ -24,10 +21,8 @@ function geoError(err) {
 
 }
 
-
+// Event listener for Geolocation
 if (navigator.geolocation) { // checks if geolocation is available in the browser
-
-
     const getLocation = document.getElementById('getLocation')
     if (getLocation) { // checks if element is on current page
         const locationIcon = document.getElementById('location_icon');
@@ -51,7 +46,7 @@ function clickForLocation() {
     locationSpinner.classList.add('loading');
 }
 
-// get GEO location
+// get GEO location by reverse geocoding
 function getMyLocation(position) {
     const coords = position.coords;
     const long = coords.longitude;
@@ -75,7 +70,7 @@ function getMyLocation(position) {
 }
 
 // RESOURCe https://stackoverflow.com/questions/57130901/getcurrentposition-in-js-does-not-work-on-ios
-
+// Testing if data is valid and change loading spinner
 function testData(data, inputField) {
     if (data.city) {
         // If location is found remove loading spinner
@@ -118,6 +113,10 @@ function testData(data, inputField) {
 
 
 
+// If javascript is enabled set input field op display none;
+const dragDropCheck = document.querySelector('.drop-zone')
+
+// Drag and drop 
 if (dragDropCheck) {
     uploadImageFailsave()
 
@@ -227,7 +226,8 @@ async function getData(url) {
 
 
 
-// If checkbox is checked, submit form
+// If checkbox is checked, submit form 
+// Adding a photo to series
 const checkBox = document.getElementById('addPhotoBox');
 if (checkBox) {
     const submitLabel = document.getElementById('seriePhotoSubmitLabel')
@@ -297,7 +297,7 @@ if (seriePage) {
 
 
 
-
+// Extra styling on upload image
 const queryString = window.location.search;
 
 if (queryString === '?newimage') {
